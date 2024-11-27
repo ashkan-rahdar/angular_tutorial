@@ -1,4 +1,4 @@
-# ** Understanding Basic Files in Angular Projects
+# **Understanding Basic Files in Angular Projects**
 
 
 ## main.ts

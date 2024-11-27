@@ -128,108 +128,172 @@ export class LifecycleComponent implements OnInit, OnDestroy {
 ### **Objective:**
 Build a simple to-do list app to practice components and templates.
 
-### **Steps:**
-1. **Create the Main Component**:
-   - Use `ng g c todo-list`.
-   - Define a `tasks` array to hold the list items.
-   - Implement methods to add and remove tasks.
+click [here](../projects/test1_component/README.md) to see codes and next semi-project documentation.
 
-2. **Define the Template**:
-   - Use an `*ngFor` directive to loop through the `tasks` array.
-   - Add input fields and buttons for adding tasks.
 
-3. **Add Styling**:
-   - Use CSS to make the list visually appealing.
 
-### **Code Example**
-#### TypeScript File (`todo-list.component.ts`)
+## ** in addition**
+
+
+### **Component Lifecycle Hooks**
+Angular components go through a series of lifecycle events. These are called **lifecycle hooks** and can be used to execute logic at specific stages.
+
+### **Common Lifecycle Hooks**
+1. **`ngOnInit`:** Called once after the component is initialized.
+2. **`ngOnChanges`:** Called when an input-bound property changes.
+3. **`ngOnDestroy`:** Called just before the component is destroyed.
+4. **`ngAfterViewInit`:** Called after the component's view is initialized.
+
+##### **Example**
+```typescript
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+
+@Component({
+  selector: 'app-lifecycle',
+  template: `<p>Check the console for lifecycle logs.</p>`
+})
+export class LifecycleComponent implements OnInit, OnChanges, OnDestroy {
+  data = 'Initial Data';
+
+  constructor() {
+    console.log('Constructor: Component instance created.');
+  }
+
+  ngOnInit() {
+    console.log('ngOnInit: Component initialized.');
+  }
+
+  ngOnChanges() {
+    console.log('ngOnChanges: Input properties changed.');
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy: Component destroyed.');
+  }
+}
+```
+
+---
+
+### **Two-Way Binding with `[(ngModel)]`**
+Two-way data binding allows data synchronization between the component and the template. Changes in the input field automatically update the component property and vice versa.
+
+##### **How It Works**
+- The syntax `[(ngModel)]` combines:
+  - **Property Binding (`[value]`)**
+  - **Event Binding (`(input)`)**
+
+##### **Example**
+###### TypeScript File
 ```typescript
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  selector: 'app-two-way-binding',
+  templateUrl: './two-way-binding.component.html'
 })
-export class TodoListComponent {
-  tasks: string[] = [];
-  newTask = '';
-
-  addTask() {
-    if (this.newTask.trim()) {
-      this.tasks.push(this.newTask);
-      this.newTask = '';
-    }
-  }
-
-  removeTask(index: number) {
-    this.tasks.splice(index, 1);
-  }
+export class TwoWayBindingComponent {
+  username = '';
 }
 ```
 
-#### Template File (`todo-list.component.html`)
+###### HTML File
 ```html
-<div class="todo-container">
-  <h1>To-Do List</h1>
-  <div>
-    <input [(ngModel)]="newTask" placeholder="Enter a new task">
-    <button (click)="addTask()">Add Task</button>
-  </div>
-  <ul>
-    <li *ngFor="let task of tasks; let i = index">
-      {{ task }}
-      <button (click)="removeTask(i)">Remove</button>
-    </li>
-  </ul>
-</div>
+<input [(ngModel)]="username" placeholder="Enter your name">
+<p>Hello, {{ username }}!</p>
 ```
 
-#### CSS File (`todo-list.component.css`)
-```css
-.todo-container {
-  text-align: center;
-  max-width: 400px;
-  margin: auto;
-}
+##### **Backend Note**
+Angular uses **FormsModule** to enable `[(ngModel)]`. Ensure it’s imported in `AppModule`:
+```typescript
+import { FormsModule } from '@angular/forms';
 
-input {
-  margin-right: 10px;
-  padding: 5px;
-}
+@NgModule({
+  imports: [FormsModule],
+  ...
+})
+```
 
-button {
-  padding: 5px 10px;
-}
+---
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+### **Structural and Attribute Directives**
+Directives modify the behavior or appearance of elements in the DOM.
 
-li {
-  margin: 10px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+#### **Structural Directives**
+Structural directives change the structure of the DOM (add/remove elements).
+1. **`*ngIf`**: Conditionally adds/removes an element.
+2. **`*ngFor`**: Iterates over a list and creates elements for each item.
 
-li button {
-  padding: 2px 5px;
-  color: white;
-  background-color: red;
-  border: none;
-  border-radius: 3px;
+##### **Examples**
+###### `*ngIf`
+```html
+<div *ngIf="isLoggedIn">
+  <p>Welcome, user!</p>
+</div>
+<button (click)="isLoggedIn = !isLoggedIn">Toggle Login</button>
+```
+
+###### `*ngFor`
+```html
+<ul>
+  <li *ngFor="let item of items; let i = index">
+    {{ i + 1 }}. {{ item }}
+  </li>
+</ul>
+```
+
+#### **Attribute Directives**
+Attribute directives modify the behavior or style of an existing element.
+1. **`[style]`**: Dynamically changes styles.
+2. **`[class]`**: Dynamically adds/removes classes.
+
+##### **Examples**
+###### `[style]`
+```html
+<p [style.color]="isImportant ? 'red' : 'blue'">
+  This text changes color dynamically.
+</p>
+```
+
+###### `[class]`
+```html
+<button [class.active]="isActive">Click Me</button>
+```
+
+---
+
+### **Template Reference Variables (`#ref`)**
+Template reference variables allow access to a DOM element or directive instance within the template.
+
+##### **Example**
+```html
+<input #userInput placeholder="Enter your name">
+<button (click)="greet(userInput.value)">Greet</button>
+<p>{{ greeting }}</p>
+```
+
+###### TypeScript File
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-template-ref',
+  templateUrl: './template-ref.component.html'
+})
+export class TemplateRefComponent {
+  greeting = '';
+
+  greet(name: string) {
+    this.greeting = `Hello, ${name}!`;
+  }
 }
 ```
 
 ---
 
 ## **Summary**
-- Components divide an app into smaller, reusable pieces.
-- Templates define the UI and link to component logic using rich Angular syntax.
-- Lifecycle hooks allow you to control behavior at specific stages of a component's life.
-
-**Practice Challenge:** Extend the To-Do List app to include:
-- A task completion toggle (mark a task as done).
-- A "Clear All" button to remove all tasks.
+1. **Component Anatomy**: Divides logic, structure, and styling into separate files.
+2. **Lifecycle Hooks**: Allow you to execute logic during specific stages of a component’s life.
+3. **Two-Way Binding**: Synchronizes data between the component and the template.
+4. **Directives**: Enhance templates with dynamic behavior.
+5. **Template Reference Variables**: Provide access to DOM elements and directives.

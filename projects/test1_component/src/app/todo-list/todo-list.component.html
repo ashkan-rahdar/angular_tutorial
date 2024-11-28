@@ -1,0 +1,14 @@
+<div class="todo-container">
+    <h1>{{username}}'s To-Do List</h1>
+    <div>
+      <input [(ngModel)]="newTask" placeholder="Enter a new task" (keydown.enter)="addTask()">
+      <button (click)="addTask()">Add Task</button>
+    </div>
+    <ul *ngIf="IsAny">
+      <li *ngFor="let task of tasks; let i = index">
+        {{ task }}
+        <button (click)="removeTask(i)">Done :)</button>
+      </li>
+    </ul>
+    <p *ngIf="!IsAny">Congratulation, you have done all tasks successfully</p>
+</div>

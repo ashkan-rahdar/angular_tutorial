@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
+  imports: [FormsModule, TodoListComponent, NgIf]
 })
 export class AppComponent {
-  title = 'test1_component';
+  username: string ="";
+  validname: boolean = this.username=="" ? false : true;
+  greeting : boolean = false;
+
+  confirm_name(){
+    this.validname = this.username=="" ? false : true;
+    if (this.username.trim()){
+      this.greeting = true;
+    }
+  }
 }

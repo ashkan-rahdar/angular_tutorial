@@ -18,7 +18,7 @@ A **service** is a class in Angular designed to provide a **shared resource** or
 #### Step 1: Create a Service
 Run the Angular CLI command:
 ```bash
-ng generate service data
+ng generate service data --project=PROJECT_NAME
 ```
 
 This generates `data.service.ts`:

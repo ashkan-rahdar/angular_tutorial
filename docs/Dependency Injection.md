@@ -223,3 +223,166 @@ Create a task manager where:
 2. **Single Responsibility Principle:** Keeps components focused on UI, while services handle data and business logic.
 3. **Testability:** Services are easier to test because they don't depend on Angular's DOM.
 4. **Scalability:** Dependency injection makes it easy to extend and replace dependencies without modifying code.
+
+
+## Dive deeper into subject
+
+### **What is Singleton Behavior?**
+
+In Angular, services are **singletons** by default when provided at the root level (`providedIn: 'root'`). 
+
+#### **Definition of Singleton Behavior:**
+A **singleton** is a design pattern where **only one instance of a class is created for the entire application**, and that same instance is shared wherever it is needed.
+
+#### **How Singleton Works in Angular:**
+- When you declare a service with `providedIn: 'root'`, Angular creates **one instance** of that service.
+- This instance is cached and shared across all components, directives, or other services that inject it.
+- No matter how many times you inject the service, you are always working with the same instance.
+
+#### **Why Singleton Behavior is Useful:**
+- Ensures consistency (shared state across components).
+- Saves memory by avoiding multiple instances of the same service.
+
+#### **Example of Singleton Behavior:**
+```typescript
+@Injectable({ providedIn: 'root' })
+export class CounterService {
+  counter = 0;
+
+  increment() {
+    this.counter++;
+  }
+}
+```
+
+##### Injecting the Service in Two Components:
+**Component A:**
+```typescript
+@Component({
+  selector: 'app-comp-a',
+  template: `<button (click)="increment()">Increment in A</button> Count: {{ count }}`
+})
+export class CompAComponent {
+  count = 0;
+
+  constructor(private counterService: CounterService) {}
+
+  increment() {
+    this.counterService.increment();
+    this.count = this.counterService.counter;
+  }
+}
+```
+
+**Component B:**
+```typescript
+@Component({
+  selector: 'app-comp-b',
+  template: `<button (click)="increment()">Increment in B</button> Count: {{ count }}`
+})
+export class CompBComponent {
+  count = 0;
+
+  constructor(private counterService: CounterService) {}
+
+  increment() {
+    this.counterService.increment();
+    this.count = this.counterService.counter;
+  }
+}
+```
+
+##### **What Happens:**
+- Both `CompAComponent` and `CompBComponent` share the same instance of `CounterService`.
+- Incrementing the counter in one component updates it for the other because of the shared instance.
+
+---
+
+### **What is Dependency Injection (DI)?**
+
+**Dependency Injection (DI)** is a **design pattern** used in Angular to:
+1. Provide **dependencies (services or other classes)** to components, directives, or other services.
+2. Let Angular handle the creation and lifecycle of those dependencies.
+
+#### **Key Idea:**
+Instead of a class creating its dependencies manually, the dependencies are **injected** by Angular.
+
+---
+
+#### **How Dependency Injection Works in Angular:**
+1. Angular has an **injector** system, which acts like a factory that creates and manages service instances.
+2. A component or service declares what dependencies it needs in its constructor.
+3. Angular's injector automatically provides (injects) the required instances when the component/service is instantiated.
+
+---
+
+#### **Example: Without DI**
+Without DI, you’d create a service instance manually:
+```typescript
+export class ComponentA {
+  private service = new DataService(); // Manual creation
+}
+```
+This has drawbacks:
+- Tightly couples the component and the service.
+- Harder to replace or mock the service for testing.
+
+#### **Example: With DI**
+With DI, Angular creates and injects the service:
+```typescript
+export class ComponentA {
+  constructor(private service: DataService) {} // Injected automatically
+}
+```
+This approach is:
+- Flexible (dependencies can be swapped out easily).
+- Easier to test.
+- Aligns with the single responsibility principle (components don’t manage service creation).
+
+---
+
+### **Difference Between Dependency Injection and Services**
+
+| **Aspect**          | **Service**                                       | **Dependency Injection (DI)**                                      |
+|----------------------|--------------------------------------------------|--------------------------------------------------------------------|
+| **Definition**       | A class designed to provide shared functionality. | A design pattern for injecting dependencies into components/services. |
+| **Purpose**          | Encapsulates business logic or shared state.      | Supplies dependencies to components or other services.            |
+| **Usage**            | Services are injected into components or other services. | The mechanism that injects services or other classes.             |
+| **Instance Management** | A service can be a singleton or scoped to a specific component/module. | DI handles creation and management of service instances.           |
+| **Example**          | `DataService` manages user data across the app.  | DI injects `DataService` into components like `LoginComponent`.    |
+
+#### **Key Relationship:**
+- **DI** is the mechanism that provides **services** (or other classes) to the places where they’re needed.
+
+---
+
+### **Back-End View of DI and Services**
+When Angular compiles the application:
+1. It creates an **injector tree** (a hierarchical structure).
+2. When a component/service requests a dependency, the injector:
+   - Checks if an instance already exists in the injector’s scope.
+   - If it exists, the instance is reused (singleton behavior).
+   - If it doesn’t exist, a new instance is created and cached.
+
+#### **Example: DI in Action**
+```typescript
+@Injectable({ providedIn: 'root' })
+export class DataService {}
+
+@Component({ selector: 'app-comp-a' })
+export class CompAComponent {
+  constructor(private dataService: DataService) {}
+}
+```
+
+##### Behind the Scenes:
+- Angular notices that `CompAComponent` depends on `DataService`.
+- It creates and caches an instance of `DataService` in the root injector.
+- Whenever `DataService` is requested, Angular provides the same instance.
+
+---
+
+### **Summary**
+1. **Services** encapsulate logic and state to be shared across the app.
+2. **Dependency Injection (DI)** is the mechanism Angular uses to supply services (or other dependencies) to components, directives, or other services.
+3. **Singleton Behavior** ensures that a single instance of a service is created and shared, promoting consistency and efficiency.

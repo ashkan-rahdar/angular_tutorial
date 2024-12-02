@@ -1,0 +1,83 @@
+[33mcommit a9ec1da8696ab58eb105525f09789af3f479f556[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Mon Dec 2 10:41:14 2024 +0330
+
+    doc # **Services and Dependency Injection in Angular**
+
+[33mcommit a13e2320ff7fa2b0f3a7f300e8da8c76a435eaa4[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Thu Nov 28 12:29:06 2024 +0330
+
+    a semi-project for practicing components
+
+[33mcommit 460403646544058b091d8b06fededef25994afcb[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 18:19:27 2024 +0330
+
+    correcting basic misstype errors
+
+[33mcommit 93d1183447e11066e54881698a44aaa04fb39592[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 18:17:44 2024 +0330
+
+    explaination about main.ts and *.json
+
+[33mcommit dcc0ae800c571eb3ced91d69d137870353d664c2[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 18:16:42 2024 +0330
+
+    seperate explaintation of basic files from main README
+
+[33mcommit 5e2fd8acd049d4e59e07171da040d8dffd3585d9[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 14:34:45 2024 +0330
+
+    add a readme file to commpnent semi project
+
+[33mcommit c7c3b28690c06ce1979d34bb03bf4042bfb44437[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 14:33:25 2024 +0330
+
+    adding important points as an /in addition/
+
+[33mcommit 2dd895caff37e277e4c29740c001ef149b36a2a7[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 14:17:22 2024 +0330
+
+    renaming doc of component
+
+[33mcommit 4ae1fb745df75a3a3e53ff440777757556ed3cab[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 14:15:50 2024 +0330
+
+    Basic explaination of component and templates
+
+[33mcommit 312d33ebd937a9a5c8c0b07128c147e4fcf51c69[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 14:15:07 2024 +0330
+
+    better explaination for package.json
+
+[33mcommit d6f4499a089ab68c9163934567e20cf061d11756[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 12:28:04 2024 +0330
+
+    First version of README
+
+[33mcommit bd8784e710a5d8b1a4ae1e6a3bd77edffe44a4b6[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 12:12:36 2024 +0330
+
+    prepare important subjects for documentation
+
+[33mcommit 644de0aef1313c7f81c6fef224d9bb8123845110[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 12:06:33 2024 +0330
+
+    writing README file
+
+[33mcommit dfbd612c3d708de43fe6e0115ececbf701b5d96b[m
+Author: ashkan-rahdar <ashkanrahdar@gmail.com>
+Date:   Wed Nov 27 12:03:55 2024 +0330
+
+    initializtion of angular 17

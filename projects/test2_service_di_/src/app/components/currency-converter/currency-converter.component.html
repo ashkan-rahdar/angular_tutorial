@@ -1,0 +1,24 @@
+<div>
+    <h2>Currency Converter</h2>
+    <label>
+      Amount:
+      <input [(ngModel)]="amount" type="number" placeholder="0" min="0"  oninput="validity.valid||(value='0');" (keydown.enter)="convert()" />
+    </label>
+    <label>
+      From:
+      <select [(ngModel)]="fromCurrency">
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </label>
+    <label>
+      To:
+      <select [(ngModel)]="toCurrency">
+        <option *ngFor="let currency of currencies" [value]="currency">{{ currency }}</option>
+      </select>
+    </label>
+    <button (click)="convert()">Convert</button>
+
+    <p *ngIf="convertedAmount !== null">
+      Converted Amount: {{ convertedAmount }}
+    </p>
+</div>

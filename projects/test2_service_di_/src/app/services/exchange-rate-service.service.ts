@@ -16,6 +16,9 @@ export class ExchangeRateServiceService {
   getExchangeRate(from: string, to: string): number {
     const rate = this.exchangeRates[from]?.[to];
     if (!rate) {
+      if (from == to){
+        return 1;
+      }
       throw new Error(`Exchange rate not available for ${from} to ${to}`);
     }
     return rate;

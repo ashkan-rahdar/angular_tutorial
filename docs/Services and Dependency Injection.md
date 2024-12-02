@@ -208,13 +208,12 @@ export class DataService {
 
 ---
 
-## **Semi-Project: Task Manager**
-### Objective:
-Create a task manager where:
-- Tasks are added using a form.
-- A service manages the list of tasks.
-- Components interact with the service to display and manipulate tasks.
-- you can see the project doc and repository [here](../projects/test2_dependercy_injection/README.md)
+## **semi-Project: Simple Currency Converter**
+
+### **Scenario**
+Create an Angular application with:
+- A service that provides exchange rates.
+- A component where users can input an amount in one currency and see its converted value in another currency.
 
 ---
 

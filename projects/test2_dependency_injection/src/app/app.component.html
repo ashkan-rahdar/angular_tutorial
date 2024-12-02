@@ -1,0 +1,9 @@
+<div>
+  <p *ngIf="greeting">Welcome {{username}} to your Dashboard</p>
+  <input *ngIf="!greeting" [(ngModel)]="username" placeholder="To start, please enter your name ..." (keydown.enter)="confirm_name()">
+  <button *ngIf="!greeting" (click)="confirm_name()">confirm</button>
+</div>
+
+<div *ngIf="validname">
+  <app-todo-list [username]="username"></app-todo-list>
+</div>

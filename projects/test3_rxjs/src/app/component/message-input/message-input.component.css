@@ -1,0 +1,48 @@
+.input{
+    flex-direction: row;
+    width: 800px;
+    height: 50px;
+}
+.input input{
+    margin-top: 0px;
+    height: 50px;
+    width: 90%;
+    /* border-end-end-radius: 5%; */
+    background-color: rgb(51, 51, 51);
+    border-color: grey;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: rgb(16, 44, 14);
+    transition: 0.5s;
+}
+.input input::placeholder{
+    margin-left: 5px;
+    color:lemonchiffon
+}
+.input input::placeholder:focus{
+    color: darkslategrey;
+}
+
+.input input:focus{
+    background-color: darkgray;
+    font-size: larger;  
+    transition: 0.5s;
+}
+.input button{
+    margin-left: 0%;
+    height: 60px;
+    width: 9%;
+    color: rgb(207, 207, 207);
+    background-color: rgb(51, 51, 51);
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: 0.5s;
+}
+.input button:hover{
+    transition: 0.5s;
+    background-color: rgb(207, 207, 207);
+    color: rgb(16, 44, 14);
+    font-size: larger;
+    cursor: pointer;
+}

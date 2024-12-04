@@ -1,1 +1,4 @@
-<p>chat-box works!</p>
+<div class="history">
+    <a *ngFor="let message of messages">{{message}}</a>
+</div>
+<app-message-input/>

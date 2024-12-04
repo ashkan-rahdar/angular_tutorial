@@ -1,20 +1,9 @@
-html{
-    display: grid;
-}
 body{
-    margin: 1%;
-    display: block;
+    display: flex;
+    flex-direction: column;
     background-color: darkslategray;
     color: azure;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    align-items: center;
     justify-content: center;
-    justify-items: center;
-}
-input{
-    margin: 1%;
-    width: 40%;
-    height: 30px;
-    border-end-end-radius: 5%;
-    border:color(from color srgb r g b);
-    border-color: grey;
 }

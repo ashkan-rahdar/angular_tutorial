@@ -379,9 +379,179 @@ export class CompAComponent {
 - It creates and caches an instance of `DataService` in the root injector.
 - Whenever `DataService` is requested, Angular provides the same instance.
 
+### **Multi-Providers in Angular**
+
+---
+
+**Multi-providers** are a feature in Angular's **Dependency Injection (DI)** system that allow multiple values to be provided for a single token. This is useful when you want to inject multiple implementations or configurations into a single service or component.
+
+---
+
+#### **When to Use Multi-Providers?**
+- **Plugin Systems**: Adding multiple plugins to an application.
+- **Event Handlers**: Registering multiple listeners for an event.
+- **Feature Extensibility**: Allowing multiple modules to contribute to a single feature.
+
+---
+
+#### **How Multi-Providers Work?**
+
+1. Use the `provide` keyword with a single token.
+2. Add the `multi: true` property in the provider configuration.
+3. Register multiple values under the same token.
+4. Angular collects all the values and provides them as an **array**.
+
+---
+
+#### **Example: Logger System**
+
+Let's build a system where multiple logger services can be registered, and the main service combines all their outputs.
+
+---
+
+##### **Step 1: Define a Token**
+
+Tokens are identifiers for dependency injection.
+
+```typescript
+import { InjectionToken } from '@angular/core';
+
+export const LOGGER_TOKEN = new InjectionToken<string[]>('LoggerToken');
+```
+
+---
+
+##### **Step 2: Create Logger Services**
+
+Create two services that will log messages in different styles.
+
+###### **ConsoleLoggerService**
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ConsoleLoggerService {
+  log(message: string): void {
+    console.log(`ConsoleLogger: ${message}`);
+  }
+}
+```
+
+###### **FileLoggerService**
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class FileLoggerService {
+  log(message: string): void {
+    // Simulate file logging
+    console.log(`FileLogger (simulated): ${message}`);
+  }
+}
+```
+
+---
+
+##### **Step 3: Register Multi-Providers**
+
+Provide both loggers using the `multi: true` option.
+
+```typescript
+import { NgModule } from '@angular/core';
+import { LOGGER_TOKEN } from './logger.token';
+import { ConsoleLoggerService } from './console-logger.service';
+import { FileLoggerService } from './file-logger.service';
+
+@NgModule({
+  providers: [
+    { provide: LOGGER_TOKEN, useClass: ConsoleLoggerService, multi: true },
+    { provide: LOGGER_TOKEN, useClass: FileLoggerService, multi: true },
+  ],
+})
+export class LoggerModule {}
+```
+
+---
+
+##### **Step 4: Create a Service to Use Multi-Providers**
+
+Inject the array of logger services and use them.
+
+###### **LoggerManagerService**
+
+```typescript
+import { Inject, Injectable } from '@angular/core';
+import { LOGGER_TOKEN } from './logger.token';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoggerManagerService {
+  constructor(@Inject(LOGGER_TOKEN) private loggers: any[]) {}
+
+  log(message: string): void {
+    this.loggers.forEach((logger) => logger.log(message));
+  }
+}
+```
+
+---
+
+##### **Step 5: Use the LoggerManagerService**
+
+Inject the `LoggerManagerService` into a component and log messages using all registered loggers.
+
+###### **AppComponent**
+
+```typescript
+import { Component } from '@angular/core';
+import { LoggerManagerService } from './logger-manager.service';
+
+@Component({
+  selector: 'app-root',
+  template: `
+    <button (click)="logMessage()">Log Message</button>
+  `,
+})
+export class AppComponent {
+  constructor(private loggerManager: LoggerManagerService) {}
+
+  logMessage(): void {
+    this.loggerManager.log('Hello from AppComponent!');
+  }
+}
+```
+
+---
+
+#### **How It Works:**
+1. **Multi-Providers Registered**: Both `ConsoleLoggerService` and `FileLoggerService` are registered under `LOGGER_TOKEN`.
+2. **DI Resolves Multi-Providers**: Angular collects all services provided with `multi: true` into an array.
+3. **LoggerManagerService**: It receives this array and iterates over the loggers to log the message.
+
+---
+
+#### **Practical Use Cases**
+1. **Event Bus**: Multiple listeners for an event system.
+2. **Middleware System**: Applying a chain of middlewares to process data.
+3. **Extensible Modules**: Allow modules to register their custom behavior dynamically.
+
+---
+
+#### **Key Points**
+- Use `multi: true` for tokens that accept multiple values.
+- Angular combines all values into an array and provides them as a single dependency.
+- Multi-providers are helpful in modular, extensible, and pluggable architectures.
+
+---
+
+Would you like to build a hands-on project to practice multi-providers or move on to the next topic?
 ---
 
 ### **Summary**
 1. **Services** encapsulate logic and state to be shared across the app.
 2. **Dependency Injection (DI)** is the mechanism Angular uses to supply services (or other dependencies) to components, directives, or other services.
 3. **Singleton Behavior** ensures that a single instance of a service is created and shared, promoting consistency and efficiency.
+4. **Multi-providers** are a feature in Angular's **Dependency Injection (DI)** system that allow multiple values to be provided for a single token. This is useful when you want to inject multiple implementations or configurations into a single service or component.

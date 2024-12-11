@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+html{
+    display: grid;
+}
+body{
+    margin: 1%;
+    display: block;
+    background-color: darkslategray;
+    color: azure;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    justify-content: center;
+    justify-items: center;
+}
+input{
+    margin: 1%;
+    width: 40%;
+    height: 30px;
+    border-end-end-radius: 5%;
+    border:color(from color srgb r g b);
+    border-color: grey;
+}
+.tooltip {
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    top: -25px;
+    left: 0;
+  }

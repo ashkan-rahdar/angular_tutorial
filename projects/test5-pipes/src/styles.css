@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkslategray;
+    color: azure;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+input{
+    margin: 1%;
+    width: 40%;
+    height: 30px;
+    border-end-end-radius: 5%;
+    border:color(from color srgb r g b);
+    border-color: grey;
+}

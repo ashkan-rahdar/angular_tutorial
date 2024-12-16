@@ -1,0 +1,16 @@
+<table class="tables">
+    <tr class="titles">
+      <th>Product</th>
+      <th>Original Price</th>
+      <th>Discounted Price</th>
+    </tr>
+    <tr *ngFor="let product of products" class="products">
+      <td style="flex-direction: column;">
+        <img [attr.src]="'/assets/' + (product.name | capitalize) + '.png'" alt="{{ product.name}}" style="width: 150px;">
+        <br>
+        <a>{{ product.name | capitalize }}</a>
+      </td>      
+      <td>{{ product.price | toman: 'T' }}</td>
+      <td>{{ product.discount | discount:product.price }}</td>
+    </tr>
+  </table>
